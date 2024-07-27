@@ -27,9 +27,10 @@ public class ChatGeminiController {
     }
 
     @PostMapping("/multipart")
-    public String file(@RequestParam(value = "file", required = false) MultipartFile file, String query) throws IOException {
+    public String file(@RequestParam(value = "file", required = false) MultipartFile file,
+                       String query, String location, String projectId, String modelName) throws IOException {
         if(file == null || file.isEmpty()){
-            return chatService.chatDiscussion(null,null,null, query) ;
+            return chatService.chatDiscussion(projectId,location,modelName, query) ;
         }
         GenerateContentResponse generateContentResponse = this.generativeModel.generateContent(
                 ContentMaker.fromMultiModalData(PartMaker.fromMimeTypeAndData(file.getContentType(),
@@ -39,8 +40,8 @@ public class ChatGeminiController {
     }
 
     @GetMapping("/chat")
-    public ResponseEntity<String> simpleGeminiChat(String query){
-        return ResponseEntity.ok(chatService.chatDiscussion(null,null,null, query)) ;
+    public ResponseEntity<String> simpleGeminiChat(String query,String location, String projectId, String modelName){
+        return ResponseEntity.ok(chatService.chatDiscussion(projectId,location,modelName, query)) ;
     }
 
 }
