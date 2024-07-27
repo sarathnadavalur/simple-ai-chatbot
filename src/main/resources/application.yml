@@ -1,0 +1,17 @@
+
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-request-size: 4MB
+      max-file-size: 4MB
+  application:
+    name: simple-ai-chatbot
+
+
+chat-service:
+  location: us-central1
+  project-id: simple-ai-chatbot-430718
+  model-name: gemini-pro
